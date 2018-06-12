@@ -8,22 +8,31 @@
     <style>
       :host {
         font-family: sans-serif;
-      }
+        --icon-toggle-color: lightgrey;
+        --icon-toggle-outline-color: black;
+        --icon-toggle-pressed-color: red;
+        --icon-toggle-testprop-color: blue;
+      }      
     </style>
   
-    <h3>Statically-configured icon-toggles</h3>
+    <h3>Elementos icon-toggle creados a mano</h3>
     
     <icon-toggle toggle-icon="star"></icon-toggle>
     <icon-toggle toggle-icon="star" pressed></icon-toggle>
-    <icon-toggle toggle-icon="settings" testprop></icon-toggle>    
+    <icon-toggle toggle-icon="settings" testprop></icon-toggle>
+    <icon-toggle toggle-icon="settings"></icon-toggle>    
     
-    <h3>Data-bound icon-toggle</h3>
+    <h3>Elemento icon-toggle bindeado a datos de objeto</h3>
 
-    <!-- use a computed binding to generate the message -->
     <div><span>[[_message(isFav)]]</span></div>
 
-    <!-- curly brackets ({{}}} allow two-way binding --> 
-    <icon-toggle toggle-icon="favorite" pressed="{{isFav}}"></icon-toggle>
+    <!-- curly brackets ({{}}} allow two-way binding -->
+    <icon-toggle toggle-icon="favorite" pressed="{{isFav}}" statustx="OMFG...."></icon-toggle>
+
+    <br />
+    <h3>Valores de propiedades objeto: </h3>
+    <span>Pressed: {{ isFav }}</span><br />
+    <span>Estado: [[ statustx ]]</span>
   </template>
 
   <script>
@@ -31,10 +40,10 @@
       static get is() { return 'demo-element' }
       _message(fav) {        
         if (fav) {
-          return 'You really like me!';
+          return 'El elemento está seleccionado, en Estado 2';
         } 
         else {
-          return 'Do you like me?';
+          return 'El elemento está deseleccionado, en Estado 1';
         }
       }
     }

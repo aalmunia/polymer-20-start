@@ -11,19 +11,22 @@
         display: inline-block;
       }
       iron-icon {
-        fill: rgba(0,0,0,0);
-        stroke: currentColor;
+        fill: var(--icon-toggle-color, rgba(0, 255, 0));
+        /* stroke: rgba(0, 0, 255); */
+        stroke: var(--icon-toggle-outline-color, rgba(0, 0, 255));
       }
       :host([pressed]) iron-icon {
-        fill: currentColor;
+        /* fill: rgba(255 ,255, 0); */
+        fill: var(--icon-toggle-pressed-color, rgba(255, 255, 0));
       }
-      :host([testprop]) iron-icon {
-        fill: rgba(255, 0, 0);
+      :host([testData]) iron-icon {
+        /* fill: rgba(255, 0, 0); */
+        fill: var(--icon-toggle-testprop-color, rgba(255, 0, 0));
       }
     </style>
 
-    <!-- <iron-icon icon="polymer"></iron-icon> -->
-    <iron-icon icon="[[toggleIcon]]"></iron-icon>
+    <iron-icon icon="[[toggleIcon]]" on-click="handleToggle"></iron-icon>
+    <span>[[statustx]]</span>
   </template>
 
   <script>
@@ -33,6 +36,12 @@
       }
       static get properties() {
         return {
+          statustx: {
+            type: String,
+            value: 'Estado 1',
+            notify: true,
+            reflectToAttribute: true
+          },
           pressed: {
             type: Boolean,
             notify: true,
@@ -47,9 +56,14 @@
       constructor() {
         super();
       }
+      handleToggle(oEvent) {
+        this.pressed = !this.pressed;
+        this.statustx = (this.statustx === 'Estado 1') ? 'Estado 2' : 'Estado 1';
+        console.log(this.statustx);
+
+      }
     }
     customElements.define(IconToggle.is, IconToggle);
   </script>
 
 </dom-module>
-
